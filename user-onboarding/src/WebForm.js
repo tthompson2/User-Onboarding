@@ -49,9 +49,22 @@ const FormikLoginForm = withFormik({
     mapPropsToValues({username, email, password}) {
         return {
             username: username || "",
+            email: email || "",
             password: password || ""
         };
     },
+
+    validatinSchema: Yup.object().shape({
+        email: Yup.string()
+        .email()
+        .required(),
+        password: Yup.string()
+        .min(6)
+        .required(),
+        username: Yup.string()
+        .min(1)
+        .required()
+    }),
 
     handleSubmit(values) {
         console.log(values);
@@ -60,4 +73,4 @@ const FormikLoginForm = withFormik({
     }
 }) (WebForm);
 
-export default WebForm;
+export default FormikLoginForm;
